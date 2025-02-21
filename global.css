@@ -1,0 +1,122 @@
+body {
+  font: 100%/1.5 system-ui, sans-serif;
+  display: flex;
+  flex-flow: column;
+  max-width: 80em;
+  min-height: 100vh;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 1em;
+}
+
+html, body {
+  margin: 0;
+  padding: 5;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+}
+   
+#map {
+  width: 100%;    /* Adjust width to your desired size */
+  height: 100%;   /* Adjust height to your desired size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for effect */
+  border-radius: 8px; /* Optional: rounded corners */
+}
+
+#map svg {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;  
+  height: 100%;
+  z-index: 1; 
+  pointer-events: none;
+}
+
+circle {
+  fill-opacity: 60%;
+  stroke: white;
+  stroke-width: 1px;
+  pointer-events: auto; /* Enable tooltips */
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+  fill: var(--color);
+}
+
+header {
+  display: flex;
+  gap: 20em;
+  align-items: baseline;
+}
+
+label {
+  margin-left: auto;
+}
+
+time {
+  display: block;
+  font-weight: bold;
+}
+
+em {
+  display: block;
+  color: gray;
+  font-style: italic;
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid black;
+  padding: 5px;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+input {
+  width: 250px; 
+}
+
+:root {
+  --color-departures: steelblue;
+  --color-balanced: #c372b8;
+  --color-arrivals: darkorange;
+}
+
+/* Legend styling */
+.legend {
+  display: flex;
+  width: 100%;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Ensures the border-radius applies properly */
+}
+
+/* Legend items */
+.legend-item {
+  flex: 1;
+  text-align: center;
+  padding: 10px 15px;
+  font-weight: bold;
+}
+
+.legend-item[style*="--departure-ratio: 1"] {
+  background-color: var(--color-departures);
+}
+
+.legend-item[style*="--departure-ratio: 0"] {
+  background-color: var(--color-arrivals);
+}
+
+.legend-item[style*="--departure-ratio: 0.5"] {
+  background-color: var(--color-balanced);
+}
